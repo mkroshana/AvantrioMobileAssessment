@@ -39,6 +39,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
         holder.name.setText(users.get(position).getName());
+        holder.fLetter.setText(users.get(position).getName().substring(0,1));
     }
 
     @Override
@@ -49,13 +50,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView name;
+        TextView name, fLetter;
 
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
 
             name = itemView.findViewById(R.id.txtName);
+            fLetter = itemView.findViewById(R.id.first_letter);
         }
     }
 }
