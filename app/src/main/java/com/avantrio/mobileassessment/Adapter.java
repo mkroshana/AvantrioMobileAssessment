@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +53,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView name, fLetter;
+        ImageView imgMenu;
 
         public ViewHolder(@NonNull View itemView)
         {
@@ -58,6 +61,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
 
             name = itemView.findViewById(R.id.txtName);
             fLetter = itemView.findViewById(R.id.first_letter);
+            imgMenu = itemView.findViewById(R.id.imgMenu);
+
+            imgMenu.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                    popupMenu.inflate(R.menu.three_dot_menu);
+                    popupMenu.show();
+                }
+            });
         }
     }
 }

@@ -21,10 +21,6 @@ public class LoginActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        //startActivity(intent);
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         EditText txtInEmail = findViewById(R.id.txtEmail);
@@ -41,7 +37,9 @@ public class LoginActivity extends AppCompatActivity
 
                 if (strEmail.matches("") || strPassword.matches(""))
                 {
-                    Toast.makeText(LoginActivity.this, "Email or Password is empty, check again!" + strPassword, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this,
+                            "Email or Password is empty, check again!" + strPassword,
+                            Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -54,7 +52,6 @@ public class LoginActivity extends AppCompatActivity
                             model.setUserToken(userToken);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
-                            //Toast.makeText(LoginActivity.this, model.getUserToken().toString(), Toast.LENGTH_LONG).show();
                         }
                     });
                 }

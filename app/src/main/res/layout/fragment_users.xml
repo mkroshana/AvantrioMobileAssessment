@@ -18,12 +18,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="40sp">
+            android:layout_marginTop="40sp"
+            android:layout_marginBottom="20sp">
 
             <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="40sp"
-                android:layout_height="40sp"
+                android:id="@+id/imgUsers"
+                android:layout_width="36sp"
+                android:layout_height="36sp"
                 android:layout_weight="0.1"
                 android:src="@drawable/ic_outline_users"
                 app:tint="@color/black" />
@@ -36,24 +37,42 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Users"
                 android:textColor="@color/black"
-                android:textSize="23sp"
+                android:textSize="18sp"
                 android:layout_marginStart="10sp"/>
+
+            <ImageView
+                android:id="@+id/imgLocation"
+                android:layout_width="32sp"
+                android:layout_height="32sp"
+                android:layout_weight="0.1"
+                android:src="@drawable/outline_pin_drop"/>
+
+            <ImageView
+                android:id="@+id/imgSort"
+                android:layout_width="32sp"
+                android:layout_height="32sp"
+                android:layout_weight="0.1"
+                android:src="@drawable/outline_sort"/>
+
         </LinearLayout>
 
         <SearchView
             android:id="@+id/searchUsers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2sp"
-            android:queryHint="Search Users"
+            android:layout_margin="12sp"
             android:iconifiedByDefault="false"
-            />
+            android:queryHint="Search Users"
+            android:background="@drawable/search_bg"
+            android:queryBackground="@android:color/transparent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/usersList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2sp"/>
+            android:layout_marginTop="20sp"
+            android:layout_marginLeft="2sp"
+            android:layout_marginRight="2sp"/>
     </LinearLayout>
 
 </FrameLayout>

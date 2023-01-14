@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/login_background"/>
+        android:src="@drawable/login_background" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         android:padding="20dp">
 
         <TextView
@@ -23,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40sp"
-            android:fontFamily="@font/amiko"
+            android:fontFamily="@font/poppins_medium"
             android:text="Login"
             android:textColor="@color/white"
             android:textSize="32sp" />
@@ -31,9 +30,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="30sp"
             android:gravity="center"
-            android:layout_marginBottom="30sp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imgAt"
@@ -48,6 +47,7 @@
                 android:layout_height="50sp"
                 android:backgroundTint="@color/white"
                 android:ems="24"
+                android:fontFamily="@font/poppins"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/white"
@@ -58,15 +58,15 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imgLock"
                 android:layout_width="28sp"
                 android:layout_height="32sp"
                 android:layout_marginRight="14sp"
-                app:srcCompat="@drawable/ic_outline_lock_24"/>
+                app:srcCompat="@drawable/ic_outline_lock_24" />
 
             <EditText
                 android:id="@+id/txtPassword"
@@ -74,10 +74,11 @@
                 android:layout_height="50sp"
                 android:backgroundTint="@color/white"
                 android:ems="24"
+                android:fontFamily="@font/poppins"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"/>
+                android:textColorHint="@color/white" />
 
         </LinearLayout>
 
@@ -85,23 +86,43 @@
             android:id="@+id/txtForgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot Password"
-            android:textColor="@color/white"
+            android:layout_gravity="right"
             android:layout_marginTop="8sp"
             android:layout_marginRight="4sp"
-            android:layout_gravity="right"/>
+            android:fontFamily="@font/poppins"
+            android:text="Forgot Password"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_login"
-            android:textColor="@color/white"
-            android:text="LOGIN"
-            android:layout_marginTop="30sp"
             android:layout_marginLeft="20sp"
-            android:layout_marginRight="20sp"/>
+            android:layout_marginTop="30sp"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/shape_login"
+            android:fontFamily="@font/poppins_medium"
+            android:text="LOGIN"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="60sp">
+
+        <TextView
+            android:id="@+id/new_to_us_s"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="New to us? Sign up"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </FrameLayout>

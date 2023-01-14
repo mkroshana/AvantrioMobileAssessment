@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
@@ -51,10 +53,20 @@ public class UsersFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        //Enable options menu in the fragment
+        setHasOptionsMenu(true);
+
         super.onCreate(savedInstanceState);
         Model model = Model.getInstance(getActivity().getApplication());
         token = model.getUserToken().toString();
+    }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater)
+    {
+        //inflating menu
+        inflater.inflate(R.menu.three_dot_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -157,8 +169,7 @@ public class UsersFragment extends Fragment
                 return headers;
             }
         };
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
-                0,
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         jsonArrayRequest.setTag("tag");

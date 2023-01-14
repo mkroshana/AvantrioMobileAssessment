@@ -4,7 +4,8 @@
     <item
         android:id="@+id/nav_home"
         android:title="Home"
-        android:icon="@drawable/ic_outline_home"/>
+        android:icon="@drawable/ic_outline_home"
+        android:enabled="false"/>
 
     <item
         android:id="@+id/nav_users"
@@ -14,6 +15,6 @@
     <item
         android:id="@+id/nav_settings"
         android:title="Settings"
-        android:icon="@drawable/ic_outline_settings"/>
-
+        android:icon="@drawable/ic_outline_settings"
+        android:enabled="false"/>
 </menu>
