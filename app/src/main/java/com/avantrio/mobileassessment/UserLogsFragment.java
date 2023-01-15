@@ -60,7 +60,8 @@ public class UserLogsFragment extends Fragment
         Bundle bundle = this.getArguments();
         if (bundle != null)
         {
-            txtName.setText(bundle.getString("username"));
+            String a = String.valueOf(bundle.getInt("userLocation")+1);
+            txtName.setText(bundle.getString("userName"));
         }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()

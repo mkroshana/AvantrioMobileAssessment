@@ -120,13 +120,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/usersList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20sp"
-            android:layout_marginLeft="2sp"
-            android:layout_marginRight="2sp"/>
     </LinearLayout>
 
 </FrameLayout>

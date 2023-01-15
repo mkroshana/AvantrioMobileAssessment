@@ -52,7 +52,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 UserLogsFragment userLogsFragment = new UserLogsFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("username", users.get(adapterPosition).getName());
+                bundle.putString("userName", users.get(adapterPosition).getName());
+                bundle.putInt("userLocation", adapterPosition);
                 userLogsFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container, userLogsFragment).addToBackStack(null).commit();
             }
