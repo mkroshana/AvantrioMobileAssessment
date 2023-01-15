@@ -13,11 +13,10 @@
         android:orientation="vertical"
         android:padding="20dp" >
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topMenuBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_marginTop="40sp"
             android:layout_marginBottom="20sp">
 
@@ -25,44 +24,57 @@
                 android:id="@+id/imgBack"
                 android:layout_width="36sp"
                 android:layout_height="22sp"
-                android:layout_weight="0.1"
                 android:src="@drawable/ic_outline_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/topMenuBar"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black" />
 
             <ImageView
                 android:id="@+id/imgUsers"
                 android:layout_width="36sp"
                 android:layout_height="36sp"
-                android:layout_weight="0.1"
+                android:layout_marginStart="8dp"
                 android:src="@drawable/ic_outline_users"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgBack"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginStart="14dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Users"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:layout_marginStart="10sp"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgUsers"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imgLocation"
                 android:layout_width="32sp"
                 android:layout_height="32sp"
-                android:layout_weight="0.1"
-                android:src="@drawable/outline_pin_drop"/>
+                android:layout_marginEnd="14dp"
+                android:src="@drawable/outline_pin_drop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgSort"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imgSort"
                 android:layout_width="32sp"
                 android:layout_height="32sp"
-                android:layout_weight="0.1"
-                android:src="@drawable/outline_sort"/>
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/outline_sort"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/txtUsername"
