@@ -40,9 +40,9 @@ public class UsersFragment extends Fragment
 {
     private RecyclerView recyclerView;
     private SearchView searchView;
-    private List<User> users;
+    private List<UsersModel> usersModels;
     private static String JSON_URL = "http://apps.avantrio.xyz:8010/api/users";
-    private Adapter adapter;
+    private UsersAdapter usersAdapter;
     String token;
 
     public UsersFragment()
@@ -84,7 +84,7 @@ public class UsersFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.usersList);
         searchView = view.findViewById(R.id.searchUsers);
-        users = new ArrayList<>();
+        usersModels = new ArrayList<>();
 
         searchView.clearFocus();
 
@@ -108,50 +108,56 @@ public class UsersFragment extends Fragment
 
     private void filterList(String s)
     {
-        List<User> filteredList = new ArrayList<>();
-        for (User user : users)
+        List<UsersModel> filteredList = new ArrayList<>();
+        for (UsersModel usersModel : usersModels)
         {
-            if (user.getName().toLowerCase().contains(s.toLowerCase()))
+            if (usersModel.getName().toLowerCase().contains(s.toLowerCase()))
             {
-                filteredList.add(user);
+                filteredList.add(usersModel);
             }
         }
 
         if (filteredList.isEmpty())
         {
             filteredList.clear();
-            adapter.setFilteredList(filteredList);
+            usersAdapter.setFilteredList(filteredList);
             Toast.makeText(getContext(), "No users found", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            adapter.setFilteredList(filteredList);
+            usersAdapter.setFilteredList(filteredList);
         }
     }
 
     private void extractUsers()
     {
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, JSON_URL, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                JSON_URL, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONArray response) {
-
-                for (int i = 0; i < response.length(); i++) {
-                    try {
+            public void onResponse(JSONArray response)
+            {
+                for (int i = 0; i < response.length(); i++)
+                {
+                    try
+                    {
                         JSONObject userObject = response.getJSONObject(i);
-                        User user = new User();
-                        user.setName(userObject.getString("name").toString());
+                        UsersModel usersModel = new UsersModel();
+                        usersModel.setName(userObject.getString("name").toString());
 
-                        users.add(user);
-                    } catch (JSONException e) {
+                        usersModels.add(usersModel);
+                    }
+                    catch (JSONException e)
+                    {
                         e.printStackTrace();
                     }
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                adapter = new Adapter(getContext(),users);
-                recyclerView.setAdapter(adapter);
+                usersAdapter = new UsersAdapter(getContext(), usersModels);
+                recyclerView.setAdapter(usersAdapter);
             }
-        }, new Response.ErrorListener() {
+        }, new Response.ErrorListener()
+        {
             @Override
             public void onErrorResponse(VolleyError error)
             {

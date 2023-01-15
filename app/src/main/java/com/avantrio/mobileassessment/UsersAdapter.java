@@ -15,20 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
+public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
 {
     LayoutInflater inflater;
-    List<User> users;
+    List<UsersModel> usersModels;
 
-    public void setFilteredList (List<User> filteredList)
+    public void setFilteredList (List<UsersModel> filteredList)
     {
-        this.users = filteredList;
+        this.usersModels = filteredList;
         notifyDataSetChanged();
     }
-    public Adapter (Context ctx, List<User> users)
+    public UsersAdapter(Context ctx, List<UsersModel> usersModels)
     {
         this.inflater = LayoutInflater.from(ctx);
-        this.users = users;
+        this.usersModels = usersModels;
     }
 
     @NonNull
@@ -42,8 +42,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
-        holder.name.setText(users.get(position).getName());
-        holder.fLetter.setText(users.get(position).getName().substring(0,1));
+        holder.name.setText(usersModels.get(position).getName());
+        holder.fLetter.setText(usersModels.get(position).getName().substring(0,1));
         holder.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -52,7 +52,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 UserLogsFragment userLogsFragment = new UserLogsFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("userName", users.get(adapterPosition).getName());
+                bundle.putString("userName", usersModels.get(adapterPosition).getName());
                 bundle.putInt("userLocation", adapterPosition);
                 userLogsFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container, userLogsFragment).addToBackStack(null).commit();
@@ -63,7 +63,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
     @Override
     public int getItemCount()
     {
-        return users.size();
+        return usersModels.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder

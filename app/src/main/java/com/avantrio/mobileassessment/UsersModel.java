@@ -1,15 +1,15 @@
 package com.avantrio.mobileassessment;
 
-public class User
+public class UsersModel
 {
     private String name;
 
-    public User()
+    public UsersModel()
     {
 
     }
 
-    public User (String name)
+    public UsersModel(String name)
     {
         this.name = name;
     }

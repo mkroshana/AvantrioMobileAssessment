@@ -60,7 +60,6 @@ public class UserLogsFragment extends Fragment
         Bundle bundle = this.getArguments();
         if (bundle != null)
         {
-            String a = String.valueOf(bundle.getInt("userLocation")+1);
             txtName.setText(bundle.getString("userName"));
         }
 
