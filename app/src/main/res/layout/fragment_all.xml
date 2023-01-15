@@ -6,6 +6,7 @@
     tools:context=".AllFragment">
 
     <TextView
+        android:id="@+id/txtView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="All Fragment"

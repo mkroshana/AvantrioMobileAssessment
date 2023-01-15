@@ -71,7 +71,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
                 {
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     UserLogsFragment userLogsFragment = new UserLogsFragment();
-                    activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container, new UserLogsFragment()).addToBackStack(null).commit();
+                    activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container,
+                            new UserLogsFragment()).addToBackStack(null).commit();
                 }
             });
             imgMenu.setOnClickListener(new View.OnClickListener()

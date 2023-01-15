@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity
 
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new UsersFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.body_container,new UsersFragment()).commit();
         bottomNavigationView.setSelectedItemId(R.id.nav_users);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener()
@@ -33,17 +33,14 @@ public class MainActivity extends AppCompatActivity
                 Fragment fragment = null;
                 switch (item.getItemId())
                 {
-                    case R.id.nav_home:
-                        fragment = new HomeFragment();
-                        break;
+                    case R.id.nav_home : fragment = new HomeFragment();
+                    break;
 
-                    case R.id.nav_users:
-                        fragment = new UsersFragment();
-                        break;
+                    case R.id.nav_users : fragment = new UsersFragment();
+                    break;
 
-                    case R.id.nav_settings:
-                        fragment = new SettingsFragment();
-                        break;
+                    case R.id.nav_settings : fragment = new SettingsFragment();
+                    break;
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();

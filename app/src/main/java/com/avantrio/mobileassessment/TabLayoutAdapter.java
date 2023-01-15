@@ -1,7 +1,5 @@
 package com.avantrio.mobileassessment;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -20,14 +18,19 @@ public class TabLayoutAdapter extends FragmentStateAdapter
     @Override
     public Fragment createFragment(int position)
     {
-        Fragment fragment = new AllFragment();
-        
+        switch (position)
+        {
+            case 0 : return new AllFragment();
+            case 1 : return new LocationFragment();
+            case 2 : return new MessagesFragment();
+            case 3 : return new AlertFragment();
+        }
         return null;
     }
 
     @Override
     public int getItemCount()
     {
-        return 0;
+        return 4 ;
     }
 }
