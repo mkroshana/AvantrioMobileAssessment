@@ -9,6 +9,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -63,6 +64,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
             fLetter = itemView.findViewById(R.id.first_letter);
             imgMenu = itemView.findViewById(R.id.imgMenu);
 
+            name.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    UserLogsFragment userLogsFragment = new UserLogsFragment();
+                    activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container, new UserLogsFragment()).addToBackStack(null).commit();
+                }
+            });
             imgMenu.setOnClickListener(new View.OnClickListener()
             {
                 @Override

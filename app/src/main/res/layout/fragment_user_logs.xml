@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserLogsFragment"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="40sp"
+            android:layout_marginBottom="20sp">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="36sp"
+                android:layout_height="22sp"
+                android:layout_weight="0.1"
+                android:src="@drawable/ic_outline_arrow_back"
+                app:tint="@color/black" />
+
+            <ImageView
+                android:id="@+id/imgUsers"
+                android:layout_width="36sp"
+                android:layout_height="36sp"
+                android:layout_weight="0.1"
+                android:src="@drawable/ic_outline_users"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:text="Users"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="10sp"/>
+
+            <ImageView
+                android:id="@+id/imgLocation"
+                android:layout_width="32sp"
+                android:layout_height="32sp"
+                android:layout_weight="0.1"
+                android:src="@drawable/outline_pin_drop"/>
+
+            <ImageView
+                android:id="@+id/imgSort"
+                android:layout_width="32sp"
+                android:layout_height="32sp"
+                android:layout_weight="0.1"
+                android:src="@drawable/outline_sort"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Roshana Perera"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginBottom="10sp"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/tabLayoutStyle">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Messages" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alert" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/tabLayoutView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/usersList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20sp"
+            android:layout_marginLeft="2sp"
+            android:layout_marginRight="2sp"/>
+    </LinearLayout>
+
+</FrameLayout>
