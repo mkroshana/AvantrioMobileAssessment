@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -22,6 +23,7 @@ public class UserLogsFragment extends Fragment
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private TabLayoutAdapter tabLayoutAdapter;
+    private TextView txtName;
 
     public UserLogsFragment()
     {
@@ -48,12 +50,18 @@ public class UserLogsFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager2 = view.findViewById(R.id.tabLayoutView);
-        //tabLayout.addTab(tabLayout.newTab().setText("AAA"));
         imgBack = view.findViewById(R.id.imgBack);
+        txtName = view.findViewById(R.id.txtUsername);
 
         FragmentManager fragmentManager = getParentFragmentManager();
         tabLayoutAdapter = new TabLayoutAdapter(fragmentManager, getLifecycle());
         viewPager2.setAdapter(tabLayoutAdapter);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null)
+        {
+            txtName.setText(bundle.getString("username"));
+        }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
         {

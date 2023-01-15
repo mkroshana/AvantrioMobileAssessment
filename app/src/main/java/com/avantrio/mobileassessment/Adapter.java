@@ -1,6 +1,7 @@
 package com.avantrio.mobileassessment;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
     {
         holder.name.setText(users.get(position).getName());
         holder.fLetter.setText(users.get(position).getName().substring(0,1));
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                int adapterPosition = holder.getAdapterPosition();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                UserLogsFragment userLogsFragment = new UserLogsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("username", users.get(adapterPosition).getName());
+                userLogsFragment.setArguments(bundle);
+                activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container, userLogsFragment).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override
@@ -64,17 +78,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>
             fLetter = itemView.findViewById(R.id.first_letter);
             imgMenu = itemView.findViewById(R.id.imgMenu);
 
-            name.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    UserLogsFragment userLogsFragment = new UserLogsFragment();
-                    activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container,
-                            new UserLogsFragment()).addToBackStack(null).commit();
-                }
-            });
             imgMenu.setOnClickListener(new View.OnClickListener()
             {
                 @Override
