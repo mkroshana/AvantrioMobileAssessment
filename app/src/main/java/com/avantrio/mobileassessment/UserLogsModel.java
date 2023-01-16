@@ -7,6 +7,7 @@ public class UserLogsModel
     private String alertView;
     private double locationLat;
     private double locationLong;
+    private String userName;
 
     public UserLogsModel()
     {
@@ -14,13 +15,14 @@ public class UserLogsModel
     }
 
     public UserLogsModel(String date, String time, String alertView, double locationLat,
-                         double locationLong)
+                         double locationLong, String userName)
     {
         this.date = date;
         this.time = time;
         this.alertView = alertView;
         this.locationLat = locationLat;
         this.locationLong = locationLong;
+        this.userName = userName;
     }
 
 
@@ -72,5 +74,15 @@ public class UserLogsModel
     public void setLocationLong(double locationLong)
     {
         this.locationLong = locationLong;
+    }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public void setUserName(String userName)
+    {
+        this.userName = userName;
     }
 }

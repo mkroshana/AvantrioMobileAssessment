@@ -144,7 +144,6 @@ public class UsersFragment extends Fragment
                         JSONObject userObject = response.getJSONObject(i);
                         UsersModel usersModel = new UsersModel();
                         usersModel.setName(userObject.getString("name").toString());
-
                         usersModels.add(usersModel);
                     }
                     catch (JSONException e)
@@ -172,7 +171,6 @@ public class UsersFragment extends Fragment
 
                 //String auth = "Bearer " + token;
                 headers.put("Authorization", "Bearer " + token );
-                Log.d("Token",token);
                 return headers;
             }
         };

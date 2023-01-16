@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
 {
     LayoutInflater inflater;
     List<UsersModel> usersModels;
+    SharedPreferenceClass sharedPreferenceClass;
 
     public void setFilteredList (List<UsersModel> filteredList)
     {
@@ -36,6 +38,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view = inflater.inflate(R.layout.user_list_layout, parent, false);
+        sharedPreferenceClass = new SharedPreferenceClass(parent.getContext());
         return new ViewHolder(view);
     }
 
@@ -44,7 +47,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
     {
         holder.name.setText(usersModels.get(position).getName());
         holder.fLetter.setText(usersModels.get(position).getName().substring(0,1));
-        holder.name.setOnClickListener(new View.OnClickListener() {
+        holder.name.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -53,7 +57,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
                 UserLogsFragment userLogsFragment = new UserLogsFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("userName", usersModels.get(adapterPosition).getName());
-                bundle.putInt("userLocation", adapterPosition);
+                sharedPreferenceClass.setValue_int("adapterPosition",adapterPosition);
                 userLogsFragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container, userLogsFragment).addToBackStack(null).commit();
             }

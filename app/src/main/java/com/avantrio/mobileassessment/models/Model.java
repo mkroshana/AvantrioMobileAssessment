@@ -11,6 +11,7 @@ public class Model
     private static Model sInstance = null;
     private final API mApi;
     private UserToken mUserToken;
+    private int UserLogsPosition;
 
     public static Model getInstance(Application application)
     {
@@ -47,5 +48,13 @@ public class Model
     public void setUserToken(UserToken userToken)
     {
         this.mUserToken = userToken;
+    }
+
+    public int getUserLogsPosition() {
+        return UserLogsPosition;
+    }
+
+    public void setUserLogsPosition(int userLogsPosition) {
+        UserLogsPosition = userLogsPosition;
     }
 }

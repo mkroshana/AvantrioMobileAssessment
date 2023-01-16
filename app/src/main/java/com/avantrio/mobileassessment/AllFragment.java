@@ -37,9 +37,11 @@ public class AllFragment extends Fragment
 {
     private RecyclerView recyclerView;
     private List<UserLogsModel> userLogsModels;
-    private static String JSON_URL = "http://apps.avantrio.xyz:8010/api/user/4/logs";
+    private static String BASE_URL = "http://apps.avantrio.xyz:8010/api/user/";
     private UserLogsAdapter userLogsAdapter;
     String token;
+    int userPosition;
+    SharedPreferenceClass sharedPreferenceClass;
     public AllFragment()
     {
         // Required empty public constructor
@@ -51,6 +53,8 @@ public class AllFragment extends Fragment
         super.onCreate(savedInstanceState);
         Model model = Model.getInstance(getActivity().getApplication());
         token = model.getUserToken().toString();
+        userPosition = model.getUserLogsPosition();
+        sharedPreferenceClass = new SharedPreferenceClass(this.getContext());
     }
 
     @Override
@@ -74,6 +78,8 @@ public class AllFragment extends Fragment
 
     private void extractUserLogs()
     {
+        int position = sharedPreferenceClass.getValue_int("adapterPosition");
+        String JSON_URL = BASE_URL + String.valueOf(position+1) + "/logs";
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 JSON_URL, null, new Response.Listener<JSONObject>()
@@ -81,23 +87,19 @@ public class AllFragment extends Fragment
             @Override
             public void onResponse(JSONObject response)
             {
-                //for (int i = 0; i < response.length(); i++)
                 {
                     try
                     {
                         JSONArray logs = response.getJSONArray("logs");
+                        UserLogsModel userLogsModel = new UserLogsModel();
                         for (int i = 0; i < logs.length(); i++)
                         {
                             JSONObject log = logs.getJSONObject(i);
-                            UserLogsModel userLogsModel = new UserLogsModel();
                             userLogsModel.setDate(log.getString("date"));
+                            userLogsModel.setTime(log.getString("time"));
+                            userLogsModel.setAlertView(log.getString("alert_view"));
                             userLogsModels.add(userLogsModel);
                         }
-                        //JSONObject userLogsObject = response;
-                        //UserLogsModel userLogsModel = new UserLogsModel();
-                        //userLogsModel.setDate(userLogsObject.getString("date").toString());
-
-                        //userLogsModels.add(userLogsModel);
                     }
                     catch (JSONException e)
                     {
@@ -121,7 +123,6 @@ public class AllFragment extends Fragment
             {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "Bearer " + token );
-                Log.d("Token",token);
                 return headers;
             }
         };
