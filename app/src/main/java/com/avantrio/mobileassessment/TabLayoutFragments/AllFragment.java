@@ -31,6 +31,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,9 +101,25 @@ public class AllFragment extends Fragment
                         for (int i = 0; i < logs.length(); i++)
                         {
                             JSONObject log = logs.getJSONObject(i);
-                            userLogsModel.setDate(log.getString("date"));
-                            userLogsModel.setTime(log.getString("time"));
-                            userLogsModel.setAlertView(log.getString("alert_view"));
+
+                            LocalDate date = LocalDate.parse(log.getString("date"));
+                            userLogsModel.setDate(date.format(DateTimeFormatter.ofPattern("dd/MMM/yyyy")));
+
+                            LocalTime time = LocalTime.parse(log.getString("time"));
+                            userLogsModel.setTime(time.format(DateTimeFormatter.ofPattern("HH:mm a")));
+
+                            if (log.getString("alert_view") == "true")
+                            {
+                                userLogsModel.setAlertView("On");
+                            }
+                            else
+                            {
+                                userLogsModel.setAlertView("Off");
+                            }
+
+                            userLogsModel.setLocationLat(Double.parseDouble(log.getString("latitude")));
+                            userLogsModel.setLocationLong(Double.parseDouble(log.getString("longitude")));
+
                             userLogsModels.add(userLogsModel);
                         }
                     }
