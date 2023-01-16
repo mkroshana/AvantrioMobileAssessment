@@ -103,8 +103,6 @@ public class AllFragment extends Fragment
                             UserLogsModel userLogsModel = new UserLogsModel();
                             JSONObject log = logs.getJSONObject(i);
 
-                            Log.d("JSON", String.valueOf(log));
-
                             LocalDate date = LocalDate.parse(log.getString("date"));
                             userLogsModel.setDate(date.format(DateTimeFormatter.ofPattern("dd/MMM/yyyy")));
 

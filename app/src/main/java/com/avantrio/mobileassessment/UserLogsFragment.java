@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class UserLogsFragment extends Fragment
 {
-    private ImageView imgBack;
+    private ImageView imgBack, imgSort;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private TabLayoutAdapter tabLayoutAdapter;
@@ -52,6 +52,7 @@ public class UserLogsFragment extends Fragment
         viewPager2 = view.findViewById(R.id.tabLayoutView);
         imgBack = view.findViewById(R.id.imgBack);
         txtName = view.findViewById(R.id.txtUsername);
+        imgSort = view.findViewById(R.id.imgSort);
 
         FragmentManager fragmentManager = getParentFragmentManager();
         tabLayoutAdapter = new TabLayoutAdapter(fragmentManager, getLifecycle());
@@ -99,6 +100,14 @@ public class UserLogsFragment extends Fragment
             public void onClick(View view)
             {
                 getActivity().onBackPressed();
+            }
+        });
+
+        imgSort.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
