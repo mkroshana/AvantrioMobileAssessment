@@ -1,6 +1,6 @@
-package com.avantrio.mobileassessment.models.api;
+package com.avantrio.mobileassessment.Models.api;
 
-import com.avantrio.mobileassessment.models.UserToken;
+import com.avantrio.mobileassessment.Models.UserToken;
 
 public class AbstractAPIListener implements APIListener
 {

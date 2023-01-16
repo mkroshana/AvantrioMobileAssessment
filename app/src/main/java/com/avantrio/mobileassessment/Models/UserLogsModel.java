@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment;
+package com.avantrio.mobileassessment.Models;
 
 public class UserLogsModel
 {

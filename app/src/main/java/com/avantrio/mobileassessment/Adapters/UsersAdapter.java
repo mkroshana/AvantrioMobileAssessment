@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment;
+package com.avantrio.mobileassessment.Adapters;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.avantrio.mobileassessment.Models.UsersModel;
+import com.avantrio.mobileassessment.R;
+import com.avantrio.mobileassessment.SharedPreferenceClass;
+import com.avantrio.mobileassessment.UserLogsFragment;
 
 import java.util.List;
 

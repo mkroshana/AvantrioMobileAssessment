@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment;
+package com.avantrio.mobileassessment.BottomNavigationFragments;
 
 import android.os.Bundle;
 
@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MessagesFragment extends Fragment
-{
-    public MessagesFragment() {
+import com.avantrio.mobileassessment.R;
+
+public class HomeFragment extends Fragment {
+
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -18,6 +20,7 @@ public class MessagesFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -25,6 +28,6 @@ public class MessagesFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_messages, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

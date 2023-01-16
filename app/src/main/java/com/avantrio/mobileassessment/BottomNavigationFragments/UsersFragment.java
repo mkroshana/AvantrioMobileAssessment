@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment;
+package com.avantrio.mobileassessment.BottomNavigationFragments;
 
 import android.os.Bundle;
 
@@ -25,7 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.avantrio.mobileassessment.models.Model;
+import com.avantrio.mobileassessment.R;
+import com.avantrio.mobileassessment.Adapters.UsersAdapter;
+import com.avantrio.mobileassessment.Models.UsersModel;
+import com.avantrio.mobileassessment.Models.AuthenticationModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,8 +60,8 @@ public class UsersFragment extends Fragment
         setHasOptionsMenu(true);
 
         super.onCreate(savedInstanceState);
-        Model model = Model.getInstance(getActivity().getApplication());
-        token = model.getUserToken().toString();
+        AuthenticationModel authenticationModel = AuthenticationModel.getInstance(getActivity().getApplication());
+        token = authenticationModel.getUserToken().toString();
     }
 
     @Override

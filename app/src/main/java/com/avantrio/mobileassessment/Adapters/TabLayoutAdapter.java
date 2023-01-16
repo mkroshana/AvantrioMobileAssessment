@@ -1,10 +1,15 @@
-package com.avantrio.mobileassessment;
+package com.avantrio.mobileassessment.Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.avantrio.mobileassessment.TabLayoutFragments.AlertFragment;
+import com.avantrio.mobileassessment.TabLayoutFragments.AllFragment;
+import com.avantrio.mobileassessment.TabLayoutFragments.LocationFragment;
+import com.avantrio.mobileassessment.TabLayoutFragments.MessagesFragment;
 
 public class TabLayoutAdapter extends FragmentStateAdapter
 {

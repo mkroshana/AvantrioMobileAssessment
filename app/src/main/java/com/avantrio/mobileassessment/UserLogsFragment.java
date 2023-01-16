@@ -1,6 +1,5 @@
 package com.avantrio.mobileassessment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avantrio.mobileassessment.Adapters.TabLayoutAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class UserLogsFragment extends Fragment

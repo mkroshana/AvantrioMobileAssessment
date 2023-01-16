@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment.models.api;
+package com.avantrio.mobileassessment.Models.api;
 
 public interface API
 {

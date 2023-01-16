@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment.models;
+package com.avantrio.mobileassessment.Models;
 
 import org.json.JSONException;
 import org.json.JSONObject;

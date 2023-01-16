@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.avantrio.mobileassessment.BottomNavigationFragments.HomeFragment;
+import com.avantrio.mobileassessment.BottomNavigationFragments.SettingsFragment;
+import com.avantrio.mobileassessment.BottomNavigationFragments.UsersFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

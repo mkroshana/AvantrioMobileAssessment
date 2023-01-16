@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment;
+package com.avantrio.mobileassessment.TabLayoutFragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.avantrio.mobileassessment.R;
 
 public class AlertFragment extends Fragment
 {

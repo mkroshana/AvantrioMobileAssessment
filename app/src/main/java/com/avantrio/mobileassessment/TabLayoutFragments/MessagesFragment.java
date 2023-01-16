@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment;
+package com.avantrio.mobileassessment.TabLayoutFragments;
 
 import android.os.Bundle;
 
@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HomeFragment extends Fragment {
+import com.avantrio.mobileassessment.R;
 
-    public HomeFragment() {
+public class MessagesFragment extends Fragment
+{
+    public MessagesFragment() {
         // Required empty public constructor
     }
 
@@ -18,7 +20,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -26,6 +27,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_messages, container, false);
     }
 }

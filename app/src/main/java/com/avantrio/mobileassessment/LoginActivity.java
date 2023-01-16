@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.avantrio.mobileassessment.models.Model;
-import com.avantrio.mobileassessment.models.UserToken;
-import com.avantrio.mobileassessment.models.api.AbstractAPIListener;
+import com.avantrio.mobileassessment.Models.AuthenticationModel;
+import com.avantrio.mobileassessment.Models.UserToken;
+import com.avantrio.mobileassessment.Models.api.AbstractAPIListener;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -43,13 +43,13 @@ public class LoginActivity extends AppCompatActivity
                 }
                 else
                 {
-                    Model model = Model.getInstance(LoginActivity.this.getApplication());
-                    model.login(strEmail,strPassword, new AbstractAPIListener()
+                    AuthenticationModel authenticationModel = AuthenticationModel.getInstance(LoginActivity.this.getApplication());
+                    authenticationModel.login(strEmail,strPassword, new AbstractAPIListener()
                     {
                         @Override
                         public void onLogin (UserToken userToken)
                         {
-                            model.setUserToken(userToken);
+                            authenticationModel.setUserToken(userToken);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }

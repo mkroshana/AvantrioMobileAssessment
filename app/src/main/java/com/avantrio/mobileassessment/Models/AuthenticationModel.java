@@ -1,30 +1,30 @@
-package com.avantrio.mobileassessment.models;
+package com.avantrio.mobileassessment.Models;
 
 import android.app.Application;
 
-import com.avantrio.mobileassessment.models.api.API;
-import com.avantrio.mobileassessment.models.api.APIListener;
-import com.avantrio.mobileassessment.models.api.WebAPI;
+import com.avantrio.mobileassessment.Models.api.API;
+import com.avantrio.mobileassessment.Models.api.APIListener;
+import com.avantrio.mobileassessment.Models.api.WebAPI;
 
-public class Model
+public class AuthenticationModel
 {
-    private static Model sInstance = null;
+    private static AuthenticationModel sInstance = null;
     private final API mApi;
     private UserToken mUserToken;
     private int UserLogsPosition;
 
-    public static Model getInstance(Application application)
+    public static AuthenticationModel getInstance(Application application)
     {
         if (sInstance == null)
         {
-            sInstance = new Model(application);
+            sInstance = new AuthenticationModel(application);
         }
         return sInstance;
     }
 
     private final Application mApplication;
 
-    private Model (Application application)
+    private AuthenticationModel(Application application)
     {
         mApplication = application;
         mApi = new WebAPI(mApplication);

@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment;
+package com.avantrio.mobileassessment.TabLayoutFragments;
 
 import android.os.Bundle;
 
@@ -19,10 +19,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.avantrio.mobileassessment.models.Model;
+import com.avantrio.mobileassessment.R;
+import com.avantrio.mobileassessment.SharedPreferenceClass;
+import com.avantrio.mobileassessment.Adapters.UserLogsAdapter;
+import com.avantrio.mobileassessment.Models.UserLogsModel;
+import com.avantrio.mobileassessment.Models.AuthenticationModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,9 +54,9 @@ public class AllFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Model model = Model.getInstance(getActivity().getApplication());
-        token = model.getUserToken().toString();
-        userPosition = model.getUserLogsPosition();
+        AuthenticationModel authenticationModel = AuthenticationModel.getInstance(getActivity().getApplication());
+        token = authenticationModel.getUserToken().toString();
+        userPosition = authenticationModel.getUserLogsPosition();
         sharedPreferenceClass = new SharedPreferenceClass(this.getContext());
     }
 

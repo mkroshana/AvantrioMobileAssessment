@@ -1,4 +1,4 @@
-package com.avantrio.mobileassessment.models.api;
+package com.avantrio.mobileassessment.Models.api;
 
 import android.app.Application;
 import android.widget.Toast;
@@ -9,8 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.avantrio.mobileassessment.models.Model;
-import com.avantrio.mobileassessment.models.UserToken;
+import com.avantrio.mobileassessment.Models.UserToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
