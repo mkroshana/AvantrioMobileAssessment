@@ -97,10 +97,13 @@ public class AllFragment extends Fragment
                     try
                     {
                         JSONArray logs = response.getJSONArray("logs");
-                        UserLogsModel userLogsModel = new UserLogsModel();
+
                         for (int i = 0; i < logs.length(); i++)
                         {
+                            UserLogsModel userLogsModel = new UserLogsModel();
                             JSONObject log = logs.getJSONObject(i);
+
+                            Log.d("JSON", String.valueOf(log));
 
                             LocalDate date = LocalDate.parse(log.getString("date"));
                             userLogsModel.setDate(date.format(DateTimeFormatter.ofPattern("dd/MMM/yyyy")));

@@ -1,6 +1,9 @@
 package com.avantrio.mobileassessment.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.avantrio.mobileassessment.Models.UsersModel;
@@ -19,11 +23,13 @@ import com.avantrio.mobileassessment.SharedPreferenceClass;
 import com.avantrio.mobileassessment.UserLogsFragment;
 
 import java.util.List;
+import java.util.Random;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
 {
     LayoutInflater inflater;
     List<UsersModel> usersModels;
+    private Context context;
     SharedPreferenceClass sharedPreferenceClass;
 
     public void setFilteredList (List<UsersModel> filteredList)
@@ -31,9 +37,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
         this.usersModels = filteredList;
         notifyDataSetChanged();
     }
-    public UsersAdapter(Context ctx, List<UsersModel> usersModels)
+    public UsersAdapter(Context context, List<UsersModel> usersModels)
     {
-        this.inflater = LayoutInflater.from(ctx);
+        this.context = context;
+        this.inflater = LayoutInflater.from(context);
         this.usersModels = usersModels;
     }
 
@@ -51,6 +58,18 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
     {
         holder.name.setText(usersModels.get(position).getName());
         holder.fLetter.setText(usersModels.get(position).getName().substring(0,1));
+
+        int color = getColorForLetter(usersModels.get(position).getName().substring(0,1));
+        Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.circle_name, null);
+        if(drawable != null && drawable instanceof GradientDrawable)
+        {
+            ((GradientDrawable) drawable).setColor(color);
+        }
+        holder.fLetter.setBackground(drawable);
+
+
+        //holder.fLetter.setBackgroundColor(color);
+
         holder.name.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -98,5 +117,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
                 }
             });
         }
+    }
+
+    private int getColorForLetter(String firstLetter)
+    {
+        //int color = Color.GRAY;
+        Random rnd = new Random();
+        int alpha = 255;
+        int red = (int) (rnd.nextInt(256) + (255 - rnd.nextInt(256)) * 0.7);
+        int green = (int) (rnd.nextInt(256) + (255 - rnd.nextInt(256)) * 0.7);
+        int blue = (int) (rnd.nextInt(256) + (255 - rnd.nextInt(256)) * 0.7);
+        int color = Color.argb(alpha, red, green, blue);
+        return color;
     }
 }

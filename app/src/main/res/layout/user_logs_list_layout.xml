@@ -54,8 +54,8 @@
             android:layout_width="86sp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:src="@drawable/outline_pin_drop"
-            android:textColor="@color/black"
+            android:src="@drawable/baseline_map"
+            app:tint="#0036CA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
