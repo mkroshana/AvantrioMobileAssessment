@@ -10,9 +10,10 @@ import android.view.ViewGroup;
 
 import com.avantrio.mobileassessment.R;
 
-public class HomeFragment extends Fragment {
-
-    public HomeFragment() {
+public class HomeFragment extends Fragment
+{
+    public HomeFragment()
+    {
         // Required empty public constructor
     }
 
@@ -20,7 +21,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

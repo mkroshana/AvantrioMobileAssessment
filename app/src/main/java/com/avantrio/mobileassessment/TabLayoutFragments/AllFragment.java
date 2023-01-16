@@ -13,12 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.avantrio.mobileassessment.R;
@@ -43,7 +40,6 @@ public class AllFragment extends Fragment
 {
     private RecyclerView recyclerView;
     private List<UserLogsModel> userLogsModels;
-    private static String BASE_URL = "http://apps.avantrio.xyz:8010/api/user/";
     private UserLogsAdapter userLogsAdapter;
     String token;
     int userPosition;
@@ -68,8 +64,7 @@ public class AllFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_all, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_all, container, false);
     }
 
     @Override
@@ -85,64 +80,55 @@ public class AllFragment extends Fragment
     private void extractUserLogs()
     {
         int position = sharedPreferenceClass.getValue_int("adapterPosition");
-        String JSON_URL = BASE_URL + String.valueOf(position+1) + "/logs";
+        String BASE_URL = "http://apps.avantrio.xyz:8010/api/user/";
+        String JSON_URL = BASE_URL + (position + 1) + "/logs";
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                JSON_URL, null, new Response.Listener<JSONObject>()
+                JSON_URL, null, response ->
         {
-            @Override
-            public void onResponse(JSONObject response)
-            {
-                {
-                    try
                     {
-                        JSONArray logs = response.getJSONArray("logs");
-
-                        for (int i = 0; i < logs.length(); i++)
+                        try
                         {
-                            UserLogsModel userLogsModel = new UserLogsModel();
-                            JSONObject log = logs.getJSONObject(i);
+                            JSONArray logs = response.getJSONArray("logs");
 
-                            LocalDate date = LocalDate.parse(log.getString("date"));
-                            userLogsModel.setDate(date.format(DateTimeFormatter.ofPattern("dd/MMM/yyyy")));
-
-                            LocalTime time = LocalTime.parse(log.getString("time"));
-                            userLogsModel.setTime(time.format(DateTimeFormatter.ofPattern("HH:mm a")));
-
-                            if (log.getString("alert_view") == "true")
+                            for (int i = 0; i < logs.length(); i++)
                             {
-                                userLogsModel.setAlertView("On");
-                            }
-                            else
-                            {
-                                userLogsModel.setAlertView("Off");
-                            }
+                                UserLogsModel userLogsModel = new UserLogsModel();
+                                JSONObject log = logs.getJSONObject(i);
 
-                            userLogsModel.setLocationLat(Double.parseDouble(log.getString("latitude")));
-                            userLogsModel.setLocationLong(Double.parseDouble(log.getString("longitude")));
+                                LocalDate date = LocalDate.parse(log.getString("date"));
+                                userLogsModel.setDate(date.format(DateTimeFormatter.ofPattern("dd/MMM/yyyy")));
 
-                            userLogsModels.add(userLogsModel);
+                                LocalTime time = LocalTime.parse(log.getString("time"));
+                                userLogsModel.setTime(time.format(DateTimeFormatter.ofPattern("HH:mm a")));
+
+                                if (log.getString("alert_view").equals("true"))
+                                {
+                                    userLogsModel.setAlertView("On");
+                                }
+                                else
+                                {
+                                    userLogsModel.setAlertView("Off");
+                                }
+
+                                userLogsModel.setLocationLat(Double.parseDouble(log.getString("latitude")));
+                                userLogsModel.setLocationLong(Double.parseDouble(log.getString("longitude")));
+
+                                userLogsModels.add(userLogsModel);
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
                         }
                     }
-                    catch (JSONException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                userLogsAdapter = new UserLogsAdapter(getContext(), userLogsModels);
-                recyclerView.setAdapter(userLogsAdapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error)
-            {
-                Log.d("tag","onErrorResponse: " + error.getMessage());
-            }
-        })
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    userLogsAdapter = new UserLogsAdapter(getContext(), userLogsModels);
+                    recyclerView.setAdapter(userLogsAdapter);
+                }, error -> Log.d("tag","onErrorResponse: " + error.getMessage()))
         {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
+            public Map<String, String> getHeaders()
             {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "Bearer " + token );

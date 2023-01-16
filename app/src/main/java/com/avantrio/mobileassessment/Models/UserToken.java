@@ -1,5 +1,7 @@
 package com.avantrio.mobileassessment.Models;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,24 +10,12 @@ public class UserToken
     public static UserToken getUserToken (JSONObject jsonObject) throws JSONException
     {
         String token = jsonObject.getString("token");
-        UserToken userToken = new UserToken(token);
-
-        return userToken;
+        return new UserToken(token);
     }
 
-    private String token;
+    private final String token;
 
     public UserToken (String token)
-    {
-        this.token = token;
-    }
-
-    public String getToken()
-    {
-        return token;
-    }
-
-    public void setToken(String token)
     {
         this.token = token;
     }
@@ -35,7 +25,7 @@ public class UserToken
     {
         boolean result = false;
 
-        if (obj != null && obj instanceof UserToken)
+        if (obj instanceof UserToken)
         {
             UserToken that = (UserToken) obj;
             if (this.token.equals(that.token))
@@ -46,6 +36,7 @@ public class UserToken
         return result;
     }
 
+    @NonNull
     @Override
     public String toString()
     {

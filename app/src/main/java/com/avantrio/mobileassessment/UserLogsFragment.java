@@ -19,11 +19,8 @@ import com.google.android.material.tabs.TabLayout;
 
 public class UserLogsFragment extends Fragment
 {
-    private ImageView imgBack, imgSort;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
-    private TabLayoutAdapter tabLayoutAdapter;
-    private TextView txtName;
 
     public UserLogsFragment()
     {
@@ -50,12 +47,12 @@ public class UserLogsFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager2 = view.findViewById(R.id.tabLayoutView);
-        imgBack = view.findViewById(R.id.imgBack);
-        txtName = view.findViewById(R.id.txtUsername);
-        imgSort = view.findViewById(R.id.imgSort);
+        ImageView imgBack = view.findViewById(R.id.imgBack);
+        TextView txtName = view.findViewById(R.id.txtUsername);
+        ImageView imgSort = view.findViewById(R.id.imgSort);
 
         FragmentManager fragmentManager = getParentFragmentManager();
-        tabLayoutAdapter = new TabLayoutAdapter(fragmentManager, getLifecycle());
+        TabLayoutAdapter tabLayoutAdapter = new TabLayoutAdapter(fragmentManager, getLifecycle());
         viewPager2.setAdapter(tabLayoutAdapter);
 
         Bundle bundle = this.getArguments();
@@ -94,21 +91,11 @@ public class UserLogsFragment extends Fragment
             }
         });
 
-        imgBack.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                getActivity().onBackPressed();
-            }
-        });
+        imgBack.setOnClickListener(view12 -> getActivity().onBackPressed());
 
-        imgSort.setOnClickListener(new View.OnClickListener()
+        imgSort.setOnClickListener(view1 ->
         {
-            @Override
-            public void onClick(View view) {
 
-            }
         });
     }
 }

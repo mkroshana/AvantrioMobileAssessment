@@ -22,6 +22,7 @@ import com.avantrio.mobileassessment.R;
 import com.avantrio.mobileassessment.SharedPreferenceClass;
 import com.avantrio.mobileassessment.UserLogsFragment;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -29,8 +30,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
 {
     LayoutInflater inflater;
     List<UsersModel> usersModels;
-    private Context context;
+    private final Context context;
     SharedPreferenceClass sharedPreferenceClass;
+    HashMap<Character, Integer> letterColors;
+    Random rnd = new Random();
 
     public void setFilteredList (List<UsersModel> filteredList)
     {
@@ -42,6 +45,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.usersModels = usersModels;
+        letterColors = new HashMap<>();
+        for (char c = 'A'; c <= 'Z'; c++) {
+            letterColors.put(c, Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
+        }
     }
 
     @NonNull
@@ -51,6 +58,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
         View view = inflater.inflate(R.layout.user_list_layout, parent, false);
         sharedPreferenceClass = new SharedPreferenceClass(parent.getContext());
         return new ViewHolder(view);
+
     }
 
     @Override
@@ -59,31 +67,27 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
         holder.name.setText(usersModels.get(position).getName());
         holder.fLetter.setText(usersModels.get(position).getName().substring(0,1));
 
-        int color = getColorForLetter(usersModels.get(position).getName().substring(0,1));
-        Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.circle_name, null);
-        if(drawable != null && drawable instanceof GradientDrawable)
-        {
-            ((GradientDrawable) drawable).setColor(color);
-        }
-        holder.fLetter.setBackground(drawable);
-
-
-        //holder.fLetter.setBackgroundColor(color);
-
-        holder.name.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
+        char firstLetter = usersModels.get(position).getName().charAt(0);
+        if(letterColors.containsKey(firstLetter)){
+            int color = letterColors.get(firstLetter);
+            Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.circle_name, null);
+            if (drawable instanceof GradientDrawable)
             {
-                int adapterPosition = holder.getAdapterPosition();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                UserLogsFragment userLogsFragment = new UserLogsFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("userName", usersModels.get(adapterPosition).getName());
-                sharedPreferenceClass.setValue_int("adapterPosition",adapterPosition);
-                userLogsFragment.setArguments(bundle);
-                activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container, userLogsFragment).addToBackStack(null).commit();
+                ((GradientDrawable) drawable).setColor(color);
             }
+            holder.fLetter.setBackground(drawable);
+        }
+
+        holder.name.setOnClickListener(view ->
+        {
+            int adapterPosition = holder.getAdapterPosition();
+            AppCompatActivity activity = (AppCompatActivity) view.getContext();
+            UserLogsFragment userLogsFragment = new UserLogsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("userName", usersModels.get(adapterPosition).getName());
+            sharedPreferenceClass.setValue_int("adapterPosition",adapterPosition);
+            userLogsFragment.setArguments(bundle);
+            activity.getSupportFragmentManager().beginTransaction().add(R.id.body_container, userLogsFragment).addToBackStack(null).commit();
         });
     }
 
@@ -93,7 +97,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
         return usersModels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
+    public static class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView name, fLetter;
         ImageView imgMenu;
@@ -106,28 +110,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
             fLetter = itemView.findViewById(R.id.first_letter);
             imgMenu = itemView.findViewById(R.id.imgMenu);
 
-            imgMenu.setOnClickListener(new View.OnClickListener()
+            imgMenu.setOnClickListener(view ->
             {
-                @Override
-                public void onClick(View view)
-                {
-                    PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-                    popupMenu.inflate(R.menu.three_dot_menu);
-                    popupMenu.show();
-                }
+                PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                popupMenu.inflate(R.menu.three_dot_menu);
+                popupMenu.show();
             });
         }
-    }
-
-    private int getColorForLetter(String firstLetter)
-    {
-        //int color = Color.GRAY;
-        Random rnd = new Random();
-        int alpha = 255;
-        int red = (int) (rnd.nextInt(256) + (255 - rnd.nextInt(256)) * 0.7);
-        int green = (int) (rnd.nextInt(256) + (255 - rnd.nextInt(256)) * 0.7);
-        int blue = (int) (rnd.nextInt(256) + (255 - rnd.nextInt(256)) * 0.7);
-        int color = Color.argb(alpha, red, green, blue);
-        return color;
     }
 }

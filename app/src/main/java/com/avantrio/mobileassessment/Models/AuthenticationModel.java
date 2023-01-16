@@ -22,17 +22,9 @@ public class AuthenticationModel
         return sInstance;
     }
 
-    private final Application mApplication;
-
     private AuthenticationModel(Application application)
     {
-        mApplication = application;
-        mApi = new WebAPI(mApplication);
-    }
-
-    public Application getApplication()
-    {
-        return mApplication;
+        mApi = new WebAPI(application);
     }
 
     public void login (String email, String password, APIListener listener)
@@ -52,9 +44,4 @@ public class AuthenticationModel
 
     public int getUserLogsPosition() {
         return UserLogsPosition;
-    }
-
-    public void setUserLogsPosition(int userLogsPosition) {
-        UserLogsPosition = userLogsPosition;
-    }
-}
+    }}

@@ -16,13 +16,12 @@ import com.avantrio.mobileassessment.Models.UserLogsModel;
 import com.avantrio.mobileassessment.R;
 
 import java.util.List;
-import java.util.Locale;
 
 public class UserLogsAdapter extends RecyclerView.Adapter<UserLogsAdapter.ViewHolder>
 {
     LayoutInflater inflater;
     List<UserLogsModel> userLogsModels;
-    private Context context;
+    private final Context context;
     public UserLogsAdapter(Context context, List<UserLogsModel> userLogsModels)
     {
         this.context = context;
@@ -44,29 +43,26 @@ public class UserLogsAdapter extends RecyclerView.Adapter<UserLogsAdapter.ViewHo
         holder.txtDate.setText(userLogsModels.get(position).getDate());
         holder.txtTime.setText(userLogsModels.get(position).getTime());
         holder.txtAlertView.setText(userLogsModels.get(position).getAlertView());
-        holder.imgLocation.setOnClickListener(new View.OnClickListener()
+        holder.imgLocation.setOnClickListener(view ->
         {
-            @Override
-            public void onClick(View view)
-            {
-                int adapterPosition = holder.getAdapterPosition();
-                String latitude = String.valueOf(userLogsModels.get(adapterPosition).getLocationLat());
-                String longitude = String.valueOf(userLogsModels.get(adapterPosition).getLocationLong());
-                String uri = "https://www.google.com/maps/search/?api=1&query="+latitude+","+longitude;
-                Uri navUri = Uri.parse(uri);
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, navUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                context.startActivity(mapIntent);
-            }
+            int adapterPosition = holder.getAdapterPosition();
+            String latitude = String.valueOf(userLogsModels.get(adapterPosition).getLocationLat());
+            String longitude = String.valueOf(userLogsModels.get(adapterPosition).getLocationLong());
+            String uri = "https://www.google.com/maps/search/?api=1&query="+latitude+","+longitude;
+            Uri navUri = Uri.parse(uri);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, navUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            context.startActivity(mapIntent);
         });
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return userLogsModels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
+    public static class ViewHolder extends RecyclerView.ViewHolder
     {
         public final TextView txtDate, txtTime, txtAlertView;
         public final ImageView imgLocation;

@@ -23,9 +23,4 @@ public class SharedPreferenceClass
     public void setValue_int(String key, int value) {
         prefsEditor.putInt(key, value).commit();
     }
-
-    public void allClear()
-    {
-        prefsEditor.remove("adapterPosition").commit();
-    }
 }

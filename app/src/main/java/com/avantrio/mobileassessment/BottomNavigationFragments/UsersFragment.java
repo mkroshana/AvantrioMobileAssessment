@@ -17,12 +17,9 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.avantrio.mobileassessment.R;
@@ -30,7 +27,6 @@ import com.avantrio.mobileassessment.Adapters.UsersAdapter;
 import com.avantrio.mobileassessment.Models.UsersModel;
 import com.avantrio.mobileassessment.Models.AuthenticationModel;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,9 +38,8 @@ import java.util.Map;
 public class UsersFragment extends Fragment
 {
     private RecyclerView recyclerView;
-    private SearchView searchView;
     private List<UsersModel> usersModels;
-    private static String JSON_URL = "http://apps.avantrio.xyz:8010/api/users";
+    private static final String JSON_URL = "http://apps.avantrio.xyz:8010/api/users";
     private UsersAdapter usersAdapter;
     String token;
 
@@ -77,8 +72,7 @@ public class UsersFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_users, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_users, container, false);
     }
 
     @Override
@@ -86,7 +80,7 @@ public class UsersFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.usersList);
-        searchView = view.findViewById(R.id.searchUsers);
+        SearchView searchView = view.findViewById(R.id.searchUsers);
         usersModels = new ArrayList<>();
 
         searchView.clearFocus();
@@ -122,7 +116,6 @@ public class UsersFragment extends Fragment
 
         if (filteredList.isEmpty())
         {
-            filteredList.clear();
             usersAdapter.setFilteredList(filteredList);
             Toast.makeText(getContext(), "No users found", Toast.LENGTH_SHORT).show();
         }
@@ -136,43 +129,32 @@ public class UsersFragment extends Fragment
     {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                JSON_URL, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response)
+                JSON_URL, null, response ->
+        {
+            for (int i = 0; i < response.length(); i++)
             {
-                for (int i = 0; i < response.length(); i++)
+                try
                 {
-                    try
-                    {
-                        JSONObject userObject = response.getJSONObject(i);
-                        UsersModel usersModel = new UsersModel();
-                        usersModel.setName(userObject.getString("name").toString());
-                        usersModels.add(usersModel);
-                    }
-                    catch (JSONException e)
-                    {
-                        e.printStackTrace();
-                    }
+                    JSONObject userObject = response.getJSONObject(i);
+                    UsersModel usersModel = new UsersModel();
+                    usersModel.setName(userObject.getString("name"));
+                    usersModels.add(usersModel);
                 }
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                usersAdapter = new UsersAdapter(getContext(), usersModels);
-                recyclerView.setAdapter(usersAdapter);
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
             }
-        }, new Response.ErrorListener()
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            usersAdapter = new UsersAdapter(getContext(), usersModels);
+            recyclerView.setAdapter(usersAdapter);
+            },
+                error ->Log.d("tag","onErrorResponse: " + error.getMessage()))
         {
             @Override
-            public void onErrorResponse(VolleyError error)
-            {
-                Log.d("tag","onErrorResponse: " + error.getMessage());
-            }
-        })
-        {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError
+            public Map<String, String> getHeaders()
             {
                 Map<String, String> headers = new HashMap<>();
-
-                //String auth = "Bearer " + token;
                 headers.put("Authorization", "Bearer " + token );
                 return headers;
             }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,34 +26,30 @@ public class LoginActivity extends AppCompatActivity
         EditText txtInPassword = findViewById(R.id.txtPassword);
         Button btnLogin = findViewById(R.id.btnLogin);
 
-        btnLogin.setOnClickListener(new View.OnClickListener()
+        btnLogin.setOnClickListener(view ->
         {
-            @Override
-            public void onClick(View view)
-            {
-                String strEmail = txtInEmail.getText().toString();
-                String strPassword = txtInPassword.getText().toString();
+            String strEmail = txtInEmail.getText().toString();
+            String strPassword = txtInPassword.getText().toString();
 
-                if (strEmail.matches("") || strPassword.matches(""))
+            if (strEmail.matches("") || strPassword.matches(""))
+            {
+                Toast.makeText(LoginActivity.this,
+                        "Email or Password is empty, check again!" + strPassword,
+                        Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                AuthenticationModel authenticationModel = AuthenticationModel.getInstance(LoginActivity.this.getApplication());
+                authenticationModel.login(strEmail,strPassword, new AbstractAPIListener()
                 {
-                    Toast.makeText(LoginActivity.this,
-                            "Email or Password is empty, check again!" + strPassword,
-                            Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    AuthenticationModel authenticationModel = AuthenticationModel.getInstance(LoginActivity.this.getApplication());
-                    authenticationModel.login(strEmail,strPassword, new AbstractAPIListener()
+                    @Override
+                    public void onLogin (UserToken userToken)
                     {
-                        @Override
-                        public void onLogin (UserToken userToken)
-                        {
-                            authenticationModel.setUserToken(userToken);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                }
+                        authenticationModel.setUserToken(userToken);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }

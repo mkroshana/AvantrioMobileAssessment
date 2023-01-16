@@ -30,7 +30,7 @@ public class TabLayoutAdapter extends FragmentStateAdapter
             case 2 : return new MessagesFragment();
             case 3 : return new AlertFragment();
         }
-        return null;
+        return new AllFragment();
     }
 
     @Override
